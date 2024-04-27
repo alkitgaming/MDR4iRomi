@@ -8,9 +8,9 @@ import java.util.ArrayList;
 
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.TeleopDriveCommand;
+import frc.robot.subsystems.API;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Navigation;
-import frc.robot.subsystems.Point;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
@@ -30,7 +30,8 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
-    m_nav.setLocations(new ArrayList<Point>());
+    m_nav.setLocations((ArrayList<Point>) API.getPathFromAPI());
+    m_nav.updateAPI(new Point("test", 1, 2));
     configureButtonBindings();
   }
 
@@ -53,6 +54,11 @@ public class RobotContainer {
     // joy.button(4).onTrue(new InstantCommand(() -> new TurnCommand(m_romiDrivetrain, m_nav, 1)));
     
     joy.button(1).onTrue(new InstantCommand(() -> m_nav.example2(m_romiDrivetrain)));
+
+    joy.button(4).onTrue(new InstantCommand(() -> m_nav.updateAPI(new Point("test", 1, 2))));
+    // joy.button(4).onTrue(new InstantCommand(() -> m_nav.setLocations((ArrayList<Point>) API.getPathFromAPI())).andThen(
+    //                             new InstantCommand(() -> m_nav.generateMovementLambdaFunctions(m_romiDrivetrain))
+    // ));
   }
 
   /**

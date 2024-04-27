@@ -35,6 +35,6 @@ public final class Constants {
         public static final double automaticOverturnAdjustmentInches = 0.0;
     }
 
-    public static final String API_PATH_URL = "";
-    public static final String API_POS_URL = "";
+    public static final String API_PATH_URL = "http://ibmi.scottklement.com:4546/mdrapi/robotPath";
+    public static final String API_POS_URL = "http://ibmi.scottklement.com:4546/mdrapi/robotLog";
 }

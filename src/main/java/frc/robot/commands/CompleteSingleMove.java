@@ -9,9 +9,9 @@ import edu.wpi.first.math.geometry.Transform2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.Point;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Navigation;
-import frc.robot.subsystems.Point;
 
 public class CompleteSingleMove extends SequentialCommandGroup {
   /** Creates a new CompleteSingleMove. */

@@ -17,6 +17,7 @@ import com.fasterxml.jackson.databind.type.TypeFactory;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.Point;
 
 public class API extends SubsystemBase {
   /** Purely static class should not be instanced */
@@ -28,7 +29,6 @@ public class API extends SubsystemBase {
   public static List<Point> getPathFromAPI()
   {
     String data = "data";
-
     try
     {
       URL url = new URL(Constants.API_PATH_URL);
@@ -62,29 +62,32 @@ public class API extends SubsystemBase {
 
   public static void sendPositionToAPI(Point point)
   {
-    ObjectMapper mapper = new ObjectMapper();
-    String data;
+    String data = "{\"location\":\"" + point.name + "\"}";
+    System.out.println(data);
+    // {"location": "test"}
     try
     {
-      data = mapper.writeValueAsString(point);
+      // data = mapper.writeValueAsString(point);
       URL url = new URL(Constants.API_POS_URL);
 
       HttpURLConnection connection = (HttpURLConnection) url.openConnection();
       connection.setRequestMethod("POST");
       connection.setRequestProperty("Content-Type", "application/json");
-      connection.setDoOutput(false);
-      connection.setDoInput(false);
+      connection.setDoOutput(true);
+      connection.setDoInput(true);
 
+      
       try(OutputStream os = connection.getOutputStream()) {
         byte[] input = data.getBytes("utf-8");
         os.write(input, 0, input.length);			
       }
       
       connection.connect();
+      System.out.println(connection.getResponseCode());
     }
     catch (Exception e)
     {
-      System.out.println(e.getStackTrace());
+      e.printStackTrace();
     }
   }
 
