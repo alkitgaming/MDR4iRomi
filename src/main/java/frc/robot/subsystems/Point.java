@@ -2,8 +2,8 @@ package frc.robot.subsystems;
 
 public class Point
 {
-  double x, y;
-  String name;
+  public double x, y;
+  public String name;
   Point(String name, double x, double y)
   {
     this.x = x;

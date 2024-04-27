@@ -21,7 +21,6 @@ public class Navigation extends SubsystemBase {
   // private double x, y, heading;
   private Pose2d pose;
   private ArrayList<Point> locations;
-  private int locationIndex;
   /** Creates a new Navigation. */
   public Navigation() 
   {
@@ -46,20 +45,18 @@ public class Navigation extends SubsystemBase {
   public void getNewPath()
   {
     locations = (ArrayList<Point>) API.getPathFromAPI();
-    locationIndex = 0;
   }
 
   public Command createCompleteSingleMove(Drivetrain drive, Point p)
   {
-    Translation2d trans = new Translation2d(p.x, p.y);
-    Command com = new CompleteSingleMove(drive, this, trans);
+    Command com = new CompleteSingleMove(drive, this, p);
     CommandScheduler.getInstance().schedule(com);
     return com;
   }
 
   public Command example2(Drivetrain drive)
   {
-    Translation2d point = new Translation2d(-12, 21);
+    Point point = new Point("a", -12, 21);
     Command com = new CompleteSingleMove(drive, this, point);
     CommandScheduler.getInstance().schedule(com);
     return com;
@@ -67,7 +64,7 @@ public class Navigation extends SubsystemBase {
 
   public Command example(Drivetrain drive)
   {
-    Translation2d point = new Translation2d(0, 0);
+    Point point = new Point("b", 0, 0);
     Command com = new CompleteSingleMove(drive, this, point);
     CommandScheduler.getInstance().schedule(com);
     return com;
@@ -115,9 +112,9 @@ public class Navigation extends SubsystemBase {
     return pose;
   }
 
-  public void updateAPI()
+  public void updateAPI(Point p)
   {
-    API.sendPositionToAPI(locations.get(locationIndex));
+    API.sendPositionToAPI(p);
   }
 
   @Override

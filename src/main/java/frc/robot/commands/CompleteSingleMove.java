@@ -11,12 +11,14 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Navigation;
+import frc.robot.subsystems.Point;
 
 public class CompleteSingleMove extends SequentialCommandGroup {
   /** Creates a new CompleteSingleMove. */
 
   public CompleteSingleMove(Drivetrain drive, Navigation nav, 
-                            Translation2d targetPosition) {
+                            Point point) {
+    Translation2d targetPosition = new Translation2d(point.x, point.y);
     Translation2d transform = targetPosition.minus(nav.getPose().getTranslation());
     // boolean invertNorm = transform.getTranslation().getAngle().getRadians() > (Math.PI / 2) || transform.getTranslation().getAngle().getRadians() < (Math.PI / -2);
     double rotationRadians = nav.getHeading() - Math.signum(nav.getHeading() + 0.0001) * Math.atan2(transform.getY(), transform.getX());
@@ -24,8 +26,8 @@ public class CompleteSingleMove extends SequentialCommandGroup {
     addCommands(
       new TurnCommand(drive, nav, rotationRadians),
       new DriveCommand(drive, nav, transform.getNorm()),
-      new InstantCommand(() -> nav.setPose(nav.getPose().transformBy(new Transform2d(targetPosition, Rotation2d.fromRadians(rotationRadians)))))
-      // new InstantCommand(() -> nav.updateAPI())
+      new InstantCommand(() -> nav.setPose(nav.getPose().transformBy(new Transform2d(targetPosition, Rotation2d.fromRadians(rotationRadians))))),
+      new InstantCommand(() -> nav.updateAPI(point))
     );
   }
 }
