@@ -47,12 +47,13 @@ public class API extends SubsystemBase {
     }
     catch (Exception e)
     {
-      System.out.println(e.getStackTrace());
+      e.printStackTrace();
     }
 
     ObjectMapper mapper = new ObjectMapper();
     TypeFactory typeFactory = mapper.getTypeFactory();
     try {
+      System.out.println(data);
       return mapper.readValue(data, typeFactory.constructCollectionType(List.class, Point.class));
     } catch (JsonProcessingException e) {
       e.printStackTrace();

@@ -55,10 +55,10 @@ public class RobotContainer {
     
     joy.button(1).onTrue(new InstantCommand(() -> m_nav.example2(m_romiDrivetrain)));
 
-    joy.button(4).onTrue(new InstantCommand(() -> m_nav.updateAPI(new Point("test", 1, 2))));
-    // joy.button(4).onTrue(new InstantCommand(() -> m_nav.setLocations((ArrayList<Point>) API.getPathFromAPI())).andThen(
-    //                             new InstantCommand(() -> m_nav.generateMovementLambdaFunctions(m_romiDrivetrain))
-    // ));
+    // joy.button(4).onTrue(new InstantCommand(() -> m_nav.updateAPI(new Point("test", 1, 2))));
+    joy.button(4).onTrue(new InstantCommand(() -> m_nav.setLocations((ArrayList<Point>) API.getPathFromAPI())).andThen(
+                                new InstantCommand(() -> m_nav.generateMovementLambdaFunctions(m_romiDrivetrain))
+    ));
   }
 
   /**
