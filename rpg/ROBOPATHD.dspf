@@ -1,0 +1,64 @@
+     A*%%TS  SD  20240426  235322  SKLEMENT    REL-V7R3M0  5770-WDS
+     A*%%EC
+     A                                      DSPSIZ(24 80 *DS3)
+     A                                      INDARA
+     A          R LOCS                      SFL
+     A*%%TS  SD  20240426  194655  SKLEMENT    REL-V7R3M0  5770-WDS
+     A            ORD            1   B  4 13
+     A            NAME          30   O  4 17
+     A            X              7Y 3O  4 49EDTCDE(M)
+     A            Y              7Y 3O  4 60EDTCDE(M)
+     A          R LOCSCTL                   SFLCTL(LOCS)
+     A*%%TS  SD  20240426  235322  SKLEMENT    REL-V7R3M0  5770-WDS
+     A                                      SFLSIZ(0009)
+     A                                      SFLPAG(0009)
+     A                                      CA03(03 'F3=Exit')
+     A                                      OVERLAY
+     A  51                                  SFLDSP
+     A N50                                  SFLDSPCTL
+     A  50                                  SFLCLR
+     A N50                                  FRCDTA
+     A N50                                  INVITE
+     A                                  1 32'Change Robot Path'
+     A                                      DSPATR(HI)
+     A                                  3 12'Num'
+     A                                      DSPATR(HI)
+     A                                      DSPATR(UL)
+     A                                  3 17'Location name                 '
+     A                                      DSPATR(HI)
+     A                                      DSPATR(UL)
+     A                                  3 60'    Y    '
+     A                                      DSPATR(HI)
+     A                                      DSPATR(UL)
+     A                                  3 49'    X    '
+     A                                      DSPATR(HI)
+     A                                      DSPATR(UL)
+     A          R LOG                       SFL
+     A*%%TS  SD  20240426  194655  SKLEMENT    REL-V7R3M0  5770-WDS
+     A            LOGTIME       26   O 15 11
+     A            LOGLOC        30   O 15 39
+     A          R LOGCTL                    SFLCTL(LOG)
+     A*%%TS  SD  20240426  222221  SKLEMENT    REL-V7R3M0  5770-WDS
+     A  61                                  SFLDSP
+     A N60                                  SFLDSPCTL
+     A  60                                  SFLCLR
+     A N60                                  SFLEND
+     A                                      SFLSIZ(9999)
+     A                                      SFLPAG(0009)
+     A N60                                  FRCDTA
+     A                                 14 11'Timestamp                 '
+     A                                      DSPATR(HI)
+     A                                      DSPATR(UL)
+     A                                 14 39'Location                      '
+     A                                      DSPATR(HI)
+     A                                      DSPATR(UL)
+     A          R MSGBOX
+     A*%%TS  SD  20240426  235322  SKLEMENT    REL-V7R3M0  5770-WDS
+     A                                      CA03(03)
+     A                                      CA12(12)
+     A                                      FRCDTA
+     A                                      OVERLAY
+     A                                      WINDOW(6 20 12 40)
+     A            MSG           36   O  6  3DSPATR(HI)
+     A                                      DSPATR(BL)
+     A                                  8 15'Press <ENTER>'
