@@ -6,14 +6,14 @@ create or replace table locmast (
 )
 rcdfmt locmastf;
 
-insert into locmast values
-  ('Airport', 1, 12),
-  ('Zoo', 2, 22),
-  ('Parking Lot', 3, 32),
-  ('Beach', 4, 42),
-  ('Hospital', 5, 52),
-  ('Gas Station', 6, 62),
-  ('Police Station', 7, 72),
-  ('Fire Station', 8, 82),
-  ('Bank', 9, 92);
+insert into locmast values --forward left is positive
+  ('Airport', 17, 32),
+  ('Zoo', -18, 30),
+  ('Parking Lot', -23, 9),
+  ('Beach', -8, -7),
+  ('Hospital', -25, 24),
+  ('Gas Station', 8, 4),
+  ('Police Station', 0, 29),
+  ('Fire Station', -13, 14),
+  ('Bank', 13, -2);
 

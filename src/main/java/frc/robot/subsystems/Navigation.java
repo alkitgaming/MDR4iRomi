@@ -31,11 +31,18 @@ public class Navigation extends SubsystemBase {
   public Command generateMovementLambdaFunctions(Drivetrain drive)
   {
     SequentialCommandGroup group = new SequentialCommandGroup();
-    for (Point p : locations)
-    {
-      group.addCommands(new InstantCommand(() -> createCompleteSingleMove(drive, p)));
-    }
+    // group.addCommands(createCompleteSingleMove(drive, p));
+    group.addCommands(createSequentialMovementLambda(drive, 0));
     return group;
+  }
+
+  private Command createSequentialMovementLambda(Drivetrain drive, int index)
+  {
+    if(index == locations.size() - 1)
+    {
+      return createCompleteSingleMove(drive, locations.get(index));
+    }
+    return createCompleteSingleMove(drive, locations.get(index)).andThen(createSequentialMovementLambda(drive, index + 1));
   }
 
   public void setLocations(ArrayList<Point> locations)
@@ -51,7 +58,6 @@ public class Navigation extends SubsystemBase {
   public Command createCompleteSingleMove(Drivetrain drive, Point p)
   {
     Command com = new CompleteSingleMove(drive, this, p);
-    CommandScheduler.getInstance().schedule(com);
     return com;
   }
 

@@ -53,7 +53,6 @@ public class API extends SubsystemBase {
     ObjectMapper mapper = new ObjectMapper();
     TypeFactory typeFactory = mapper.getTypeFactory();
     try {
-      System.out.println(data);
       return mapper.readValue(data, typeFactory.constructCollectionType(List.class, Point.class));
     } catch (JsonProcessingException e) {
       e.printStackTrace();
@@ -64,7 +63,6 @@ public class API extends SubsystemBase {
   public static void sendPositionToAPI(Point point)
   {
     String data = "{\"location\":\"" + point.name + "\"}";
-    System.out.println(data);
     // {"location": "test"}
     try
     {
@@ -84,7 +82,6 @@ public class API extends SubsystemBase {
       }
       
       connection.connect();
-      System.out.println(connection.getResponseCode());
     }
     catch (Exception e)
     {
