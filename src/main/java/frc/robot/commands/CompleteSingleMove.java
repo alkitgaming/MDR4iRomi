@@ -20,12 +20,11 @@ public class CompleteSingleMove extends SequentialCommandGroup {
                             Point point) {
     Translation2d targetPosition = new Translation2d(point.x, point.y);
     Translation2d transform = targetPosition.minus(nav.getPose().getTranslation());
-    // boolean invertNorm = transform.getTranslation().getAngle().getRadians() > (Math.PI / 2) || transform.getTranslation().getAngle().getRadians() < (Math.PI / -2);
     double rotationRadians = nav.getHeading() - Math.signum(nav.getHeading() + 0.0001) * Math.atan2(transform.getY(), transform.getX());
     // double rotationRadians = transform.getRotation().getRadians() + (invertNorm ? (transform.getRotation().getRadians() > 0 ? Math.PI : -Math.PI) : 0) + nav.getHeading();
     addCommands(
-      new TurnCommand(drive, nav, rotationRadians),
-      new DriveCommand(drive, nav, transform.getNorm()),
+      new TurnCommand(drive, nav, point),
+      new DriveCommand(drive, nav, point),
       new InstantCommand(() -> nav.setPose(nav.getPose().transformBy(new Transform2d(targetPosition, Rotation2d.fromRadians(rotationRadians))))),
       new InstantCommand(() -> nav.updateAPI(point))
     );

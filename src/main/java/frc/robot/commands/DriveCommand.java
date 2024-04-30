@@ -4,20 +4,25 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
+import frc.robot.Point;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Navigation;
 
 public class DriveCommand extends Command {
   double distance;
+  Point point;
   Drivetrain drive;
   Navigation nav;
   double encoderInitial, encoderTarget, encoderPrevious;
+  Translation2d targetPosition;
+  Translation2d transform;
   /** Creates a new DriveCommand. */
-  public DriveCommand(Drivetrain drive, Navigation nav, double distance) {
-    this.distance = distance;
+  public DriveCommand(Drivetrain drive, Navigation nav, Point point) {
+    this.point = point;
     this.drive = drive;
     this.nav = nav;
     addRequirements(drive, nav);
@@ -27,6 +32,9 @@ public class DriveCommand extends Command {
   @Override
   public void initialize() 
   {
+    targetPosition = new Translation2d(point.x, point.y);
+    transform = targetPosition.minus(nav.getPose().getTranslation());
+    distance = transform.getNorm();
     encoderInitial = drive.getDistanceInch();
     encoderTarget = encoderInitial + distance;
     encoderPrevious = encoderInitial;

@@ -4,21 +4,29 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
+import frc.robot.Point;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Navigation;
 
 public class TurnCommand extends Command {
-  double dtheta;
+  Point point;
   Drivetrain drive;
   Navigation nav;
   double encoderInitial, encoderTargetInches, encoderTotalDistance, encoderPrevious;
   boolean goingClockwise;
+
+  Translation2d targetPosition;
+  Translation2d transform;
+  double dtheta;    
+
   /** Creates a new TurnCommand. */
-  public TurnCommand(Drivetrain drive, Navigation nav, double dtheta) {
-    this.dtheta = dtheta;
+  public TurnCommand(Drivetrain drive, Navigation nav, Point point) {
+    // this.dtheta = dtheta;
+    this.point = point;
     this.drive = drive;
     this.nav = nav;
     addRequirements(drive, nav);
@@ -29,6 +37,10 @@ public class TurnCommand extends Command {
   public void initialize() 
   {
     drive.setMotors(0, 0);
+    targetPosition = new Translation2d(point.x, point.y);
+    transform = targetPosition.minus(nav.getPose().getTranslation());
+    dtheta = nav.getHeading() - Math.signum(nav.getHeading() + 0.0001) * Math.atan2(transform.getY(), transform.getX());
+
     goingClockwise = dtheta < 0 ? true : false;
     encoderInitial = drive.getDistanceInch();
     encoderPrevious = encoderInitial;
