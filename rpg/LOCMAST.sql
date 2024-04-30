@@ -15,5 +15,5 @@ insert into locmast values --forward left is positive
   ('Gas Station', 8, 4),
   ('Police Station', 0, 29),
   ('Fire Station', -13, 14),
-  ('Bank', 13, -2);
+  ('Bank', -2, 13);
 
