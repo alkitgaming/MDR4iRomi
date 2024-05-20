@@ -16,7 +16,7 @@ public final class Constants {
     public final class Drive
     {
         public static final double defaultDriveSpeed = 0.2;
-        public static final double defaultTurnSpeed = 0.1;
+        public static final double defaultTurnSpeed = 0.14;
 
         public static final double wheelbaseDiameterInches = 6;
 
@@ -32,7 +32,7 @@ public final class Constants {
         //The robot's hardware causes a right turn 
         //when the motors are run at the same power.
         public static final double rightSideCorrectionMultiplier = 0.96;
-        public static final double automaticOverturnAdjustmentInches = 0.0;
+        public static final double automaticOverturnAdjustmentInches = -0.30;
     }
 
     public static final String API_PATH_URL = "http://ibmi.scottklement.com:4546/mdrapi/robotPath";

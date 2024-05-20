@@ -52,6 +52,16 @@ public class Navigation extends SubsystemBase {
   public void getNewPath()
   {
     locations = (ArrayList<Point>) API.getPathFromAPI();
+
+    //This rotates it 90 degrees in the robot's understanding
+    //I choose to use positive Y as the forward direction,
+    //while the robot prefers positive X (which is for some reason left, not right)
+    for (Point p : locations)
+    {
+      double temp = p.x;
+      p.x = p.y;
+      p.y = -temp;
+    }
   }
 
   public Command createCompleteSingleMove(Drivetrain drive, Point p)

@@ -6,6 +6,9 @@ package frc.robot;
 
 import java.util.ArrayList;
 
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.TeleopDriveCommand;
 import frc.robot.subsystems.API;
@@ -31,7 +34,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     m_nav.setLocations((ArrayList<Point>) API.getPathFromAPI());
-    m_nav.updateAPI(new Point("test", 1, 2));
+    // m_nav.updateAPI(new Point("test", 1, 2));
     configureButtonBindings();
   }
 
@@ -56,8 +59,9 @@ public class RobotContainer {
     joy.button(1).onTrue(new InstantCommand(() -> m_nav.example2(m_romiDrivetrain)));
 
     // joy.button(4).onTrue(new InstantCommand(() -> m_nav.updateAPI(new Point("test", 1, 2))));
-    joy.button(4).onTrue(new InstantCommand(() -> m_nav.setLocations((ArrayList<Point>) API.getPathFromAPI())).andThen(
-                                new InstantCommand(() -> m_nav.generateMovementLambdaFunctions(m_romiDrivetrain).schedule())
+    joy.button(4).onTrue(new InstantCommand(() -> m_nav.getNewPath()).andThen(
+                                new InstantCommand(() -> m_nav.resetPose()).andThen(
+                                new InstantCommand(() -> m_nav.generateMovementLambdaFunctions(m_romiDrivetrain).schedule()))
     ));
   }
 

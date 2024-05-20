@@ -39,7 +39,7 @@ public class TurnCommand extends Command {
     drive.setMotors(0, 0);
     targetPosition = new Translation2d(point.x, point.y);
     transform = targetPosition.minus(nav.getPose().getTranslation());
-    dtheta = nav.getHeading() - Math.signum(nav.getHeading() + 0.0001) * Math.atan2(transform.getY(), transform.getX());
+    dtheta = -(transform.getAngle().getRadians() - nav.getHeading()); 
 
     goingClockwise = dtheta < 0 ? true : false;
     encoderInitial = drive.getDistanceInch();

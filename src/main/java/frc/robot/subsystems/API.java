@@ -80,8 +80,8 @@ public class API extends SubsystemBase {
         byte[] input = data.getBytes("utf-8");
         os.write(input, 0, input.length);			
       }
-      
-      connection.connect();
+      System.out.println();
+      connection.getInputStream().read();
     }
     catch (Exception e)
     {
