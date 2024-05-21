@@ -11,14 +11,12 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Point;
 import frc.robot.commands.CompleteSingleMove;
 
 public class Navigation extends SubsystemBase {
-  // private double x, y, heading;
   private Pose2d pose;
   private ArrayList<Point> locations;
   /** Creates a new Navigation. */
@@ -30,7 +28,6 @@ public class Navigation extends SubsystemBase {
   public Command generateMovementLambdaFunctions(Drivetrain drive)
   {
     SequentialCommandGroup group = new SequentialCommandGroup();
-    // group.addCommands(createCompleteSingleMove(drive, p));
     group.addCommands(createSequentialMovementLambda(drive, 0));
     return group;
   }
@@ -67,22 +64,6 @@ public class Navigation extends SubsystemBase {
   public Command createCompleteSingleMove(Drivetrain drive, Point p)
   {
     Command com = new CompleteSingleMove(drive, this, p);
-    return com;
-  }
-
-  public Command example2(Drivetrain drive)
-  {
-    Point point = new Point("a", -12, 21);
-    Command com = new CompleteSingleMove(drive, this, point);
-    CommandScheduler.getInstance().schedule(com);
-    return com;
-  }
-
-  public Command example(Drivetrain drive)
-  {
-    Point point = new Point("b", 0, 0);
-    Command com = new CompleteSingleMove(drive, this, point);
-    CommandScheduler.getInstance().schedule(com);
     return com;
   }
 

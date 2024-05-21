@@ -49,7 +49,6 @@ public class DriveCommand extends Command {
   public void execute() 
   {
     drive.setMotors(Constants.Drive.defaultDriveSpeed, Constants.Drive.defaultDriveSpeed);
-    // nav.incrementPosition(drive.getDistanceInch() - encoderPrevious);
     SmartDashboard.putNumber("velocity", drive.getDistanceInch() - encoderPrevious);
     encoderPrevious = drive.getDistanceInch();
   }

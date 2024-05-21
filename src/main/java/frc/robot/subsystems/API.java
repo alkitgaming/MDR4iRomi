@@ -63,10 +63,8 @@ public class API extends SubsystemBase {
   public static void sendPositionToAPI(Point point)
   {
     String data = "{\"location\":\"" + point.name + "\"}";
-    // {"location": "test"}
     try
     {
-      // data = mapper.writeValueAsString(point);
       URL url = new URL(Constants.API_POS_URL);
 
       HttpURLConnection connection = (HttpURLConnection) url.openConnection();

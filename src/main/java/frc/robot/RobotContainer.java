@@ -48,20 +48,13 @@ public class RobotContainer {
   {
     m_romiDrivetrain.setDefaultCommand(new TeleopDriveCommand(m_romiDrivetrain, joy::getY, joy::getX));
 
-    // joy.button(1).onTrue(new InstantCommand(() -> Navigation.createCompleteSingleMove(m_romiDrivetrain, m_nav)));
-    // joy.button(2).onTrue(new DriveCommand(m_romiDrivetrain, m_nav, 5));
-    joy.button(2).onTrue(new InstantCommand(() -> m_nav.example(m_romiDrivetrain)));
-    joy.button(3).onTrue(new InstantCommand(() -> m_nav.resetPose()));
-    joy.button(3).onTrue(new InstantCommand(() -> m_romiDrivetrain.resetEncoders()));
-    // joy.button(4).onTrue(new InstantCommand(() -> m_nav.setCurrentOrientation(Math.PI / 4)));
-    // joy.button(4).onTrue(new InstantCommand(() -> new TurnCommand(m_romiDrivetrain, m_nav, 1)));
-    
-    joy.button(1).onTrue(new InstantCommand(() -> m_nav.example2(m_romiDrivetrain)));
-
-    // joy.button(4).onTrue(new InstantCommand(() -> m_nav.updateAPI(new Point("test", 1, 2))));
+    //When running the robot, it must start on a specific spot and know it is there.
+    //After starting, it requests the positions, resets its simulated coordinate system,
+    //and schedules a sequence of turn and drive commands. 
     joy.button(4).onTrue(new InstantCommand(() -> m_nav.getNewPath()).andThen(
                                 new InstantCommand(() -> m_nav.resetPose()).andThen(
-                                new InstantCommand(() -> m_nav.generateMovementLambdaFunctions(m_romiDrivetrain).schedule()))
+                                new InstantCommand(() -> m_romiDrivetrain.resetEncoders()).andThen(
+                                new InstantCommand(() -> m_nav.generateMovementLambdaFunctions(m_romiDrivetrain).schedule())))
     ));
   }
 

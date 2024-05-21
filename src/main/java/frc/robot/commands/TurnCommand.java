@@ -63,7 +63,6 @@ public class TurnCommand extends Command {
     {
       drive.setMotors(-Constants.Drive.defaultTurnSpeed, Constants.Drive.defaultTurnSpeed);
     }
-    // nav.incrementRotation((drive.getDistanceInch() - encoderPrevious) / Constants.Drive.radiansToInchesConversion);
     encoderPrevious = drive.getDistanceInch();
   }
 

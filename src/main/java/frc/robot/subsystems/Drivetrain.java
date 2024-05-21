@@ -24,8 +24,6 @@ public class Drivetrain extends SubsystemBase {
   private final Encoder m_leftEncoder = new Encoder(4, 5);
   private final Encoder m_rightEncoder = new Encoder(6, 7);
 
-  // Set up the differential drive controller
-
   /** Creates a new RomiDrivetrain. */
   public Drivetrain() {
     // Use inches as unit for encoder distances
