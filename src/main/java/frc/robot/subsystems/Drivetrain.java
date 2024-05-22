@@ -37,8 +37,8 @@ public class Drivetrain extends SubsystemBase {
 
   public void setMotors(double left, double right)
   {
-    m_leftMotor.set(left);
-    m_rightMotor.set(right * Constants.Drive.rightSideCorrectionMultiplier);
+    m_leftMotor.set(left * Constants.Drive.overallSpeedMulitplier * Constants.Drive.leftSideSpeedMultiplier);
+    m_rightMotor.set(right * Constants.Drive.overallSpeedMulitplier);
   }
 
   public void resetEncoders() {

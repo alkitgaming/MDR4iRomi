@@ -31,7 +31,8 @@ public final class Constants {
 
         //The robot's hardware causes a right turn 
         //when the motors are run at the same power.
-        public static final double rightSideCorrectionMultiplier = 0.96;
+        public static final double overallSpeedMulitplier = 0.96;
+        public static final double leftSideSpeedMultiplier = 1.1;
         public static final double automaticOverturnAdjustmentInches = -0.30;
     }
 
